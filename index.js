@@ -3,9 +3,10 @@
  */
 
 var inquirer = require('inquirer');
+var analysis = require('./util/analysis');
 
 var config = {
-  type: "",
+  scanHidden: false,
   folders: []
 };
 
@@ -33,9 +34,6 @@ var specifyFolderQuestion = [{
 
 inquirer.prompt(whatToScanQuestion)
   .then(function (answer) {
-
-    config["type"] = answer["options"];
-
     return Promise.resolve(answer["options"]);
   })
   .then(function (options) {
@@ -43,10 +41,14 @@ inquirer.prompt(whatToScanQuestion)
       return inquirer.prompt(specifyFolderQuestion).then(function (answer) {
         config["folders"] = answer["foldersToScan"].split(" ");
       });
+    } else {
+      if (options === "noHidden") config.scanHidden = true;
+      analysis.getFolders(options, config);
     }
-    return Promise.resolve();
   })
   .then(function () {
-    console.log("end");
-    console.log(config);
+    analysis.analyze(config);
+  })
+  .catch(function (err) {
+    console.log(err.stack);
   });
