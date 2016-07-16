@@ -1,0 +1,26 @@
+{
+  "name": "project-stat",
+  "version": "1.0.0",
+  "description": "A command tools to analyze a project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuangqh/project-stat.git"
+  },
+  "keywords": [
+    "command",
+    "tool"
+  ],
+  "author": "zhuangqh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhuangqh/project-stat/issues"
+  },
+  "homepage": "https://github.com/zhuangqh/project-stat#readme",
+  "dependencies": {
+    "inquirer": "^1.1.2"
+  }
+}

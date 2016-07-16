@@ -2,3 +2,6 @@
 
 // dependence
 node_modules
+
+// IDE
+.idea/
