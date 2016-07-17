@@ -4,8 +4,7 @@
 
 var fs = require('fs');
 var path = require('path');
-
-var count = 0;
+var statistics = require('./statistics');
 
 function getFolders(type, config) {
   if (type != "noHidden" && type != "all") return;
@@ -17,7 +16,26 @@ function analyze(config) {
   config.folders.forEach(function (ele) {
     analyzeHelper(ele, config.scanHidden);
   });
-  console.log(count);
+  console.log(statistics.counter);
+}
+
+function countByType(basePath) {
+  var slashIndex = -1;
+  var dotIndex = -1;
+  var ext = '';
+
+  slashIndex = basePath.lastIndexOf('/');
+  if (slashIndex !== -1) {
+    basePath = basePath.substr(slashIndex + 1);
+  }
+
+  dotIndex = basePath.lastIndexOf('.');
+  if (dotIndex === -1) {
+    statistics['counter']['PlainText']++;
+  } else {
+    ext = basePath.substr(dotIndex + 1);
+    statistics['counter'][statistics.extTable[ext]]++;
+  }
 }
 
 function analyzeHelper(basePath, noHidden) {
@@ -26,7 +44,7 @@ function analyzeHelper(basePath, noHidden) {
     return;
 
   if (!fs.lstatSync(basePath).isDirectory()) {
-    ++count;
+    countByType(basePath);
     return;
   }
 
