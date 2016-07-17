@@ -5,6 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 var statistics = require('./statistics');
+var reporter = require('./reporter');
 
 function getFolders(type, config) {
   if (type != "noHidden" && type != "all") return;
@@ -16,7 +17,8 @@ function analyze(config) {
   config.folders.forEach(function (ele) {
     analyzeHelper(ele, config.scanHidden);
   });
-  console.log(statistics.counter);
+
+  reporter.report(statistics.counter);
 }
 
 function countByType(basePath) {

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/zhuangqh/project-stat#readme",
   "dependencies": {
+    "cli-color": "^1.1.0",
     "inquirer": "^1.1.2"
   }
 }
