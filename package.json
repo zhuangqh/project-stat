@@ -1,8 +1,12 @@
 {
-  "name": "project-stat",
+  "name": "stat-cli",
   "version": "1.0.0",
   "description": "A command tools to analyze a project",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": {
+    "pstat": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
